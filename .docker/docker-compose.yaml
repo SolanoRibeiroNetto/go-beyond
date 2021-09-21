@@ -1,0 +1,47 @@
+version: "3"
+services:
+ web:
+  image: leolegends/laravel-gobeyond:php-8.0
+  volumes:
+   - "./../:/var/www/html"
+  ports:
+   - '81:8000'
+  networks: 
+    - gobeyond-network
+
+ mysql:
+  image: mysql:8.0
+  ports:
+    - 3307:3306
+  environment:
+   MYSQL_ROOT_PASSWORD: 123
+   MYSQL_DATABASE: gobeyond
+   MYSQL_USER: gobeyond
+   MYSQL_PASSWORD: 123
+  networks: 
+    - gobeyond-network
+  volumes:
+    - mysql_data:/var/lib/mysql
+
+ redis:
+  image: 'bitnami/redis'
+  ports:
+   - '6380:6379'
+  sysctls:
+    net.core.somaxconn: 1024
+  volumes:
+   - redis_data:/bitnami/redis/data
+  restart: always
+  environment:
+   - WORKSPACE_PUID=1000
+   - WORKSPACE_PGID=1000
+   - REDIS_PASSWORD=123
+  networks:
+   - gobeyond-network
+
+networks:
+ gobeyond-network:
+
+volumes:
+  redis_data:
+  mysql_data:
