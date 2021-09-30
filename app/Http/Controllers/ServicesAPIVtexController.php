@@ -20,7 +20,7 @@ class ServicesAPIVtexController extends Controller
     public function listagemSearchVtex()
     {
 
-        $result = $this->endpointSearch->searchServiceVtex("https://loja.chillibeans.com.br/api/catalog_system/pub/products/search?Rayban");
+        $result = $this->endpointSearch->searchServiceVtex("http://loja.chillibeans.com.br/api/catalog_system/pub/products/search?chill");
 
         return $result;
     }

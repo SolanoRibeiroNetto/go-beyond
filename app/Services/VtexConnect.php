@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Http;
 trait VtexConnect {
     
     public function connectGet($url)
-    {        
+    {      
         $result = Http::accept('application/json')->get($url);
+        
+        dd($result);
         return $result;
     }
 
